@@ -1,5 +1,6 @@
 import reactCoreConecpts from "./assets/react-core-concepts.png";
 import componentsImg from "./assets/components.png";
+import { CORE_CONCEPTS } from "./data.js";
 
 const reactDescriptions = ["Fundamental", "Crucial", "Core"];
 
@@ -22,12 +23,21 @@ function Header() {
   );
 }
 
-function CoreConcept(props) {
+function CoreConcept({
+  title = "Title",
+  description = "Description...",
+  image,
+}) {
+  // I like validation...
+  if (!image) {
+    return null;
+  }
+
   return (
     <li>
-      <img src={props.img} alt="" />
-      <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <img src={image} alt="" />
+      <h3>{title}</h3>
+      <p>{description}</p>
     </li>
   );
 }
@@ -40,13 +50,11 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConcept
-              title="Components"
-              description="The core UI building block."
-              img={componentsImg}
-            />
-            <CoreConcept title="Crucial" />
-            <CoreConcept title="Core" />
+            {/* Neat, I didn't realise we can use the spread operator for sending data to compoentns */}
+            <CoreConcept {...CORE_CONCEPTS[0]} />
+            <CoreConcept {...CORE_CONCEPTS[1]} />
+            <CoreConcept {...CORE_CONCEPTS[2]} />
+            <CoreConcept {...CORE_CONCEPTS[3]} />
           </ul>
         </section>
       </main>
